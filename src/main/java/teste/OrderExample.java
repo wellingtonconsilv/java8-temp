@@ -13,7 +13,7 @@ public class OrderExample {
         Order order3 = new Order("Fulano", Status.CONFIRMED);
         Order order4 = new Order("Tadeu", Status.PENDING);
         Order order5 = new Order("Joao", Status.CONFIRMED);
-        List<Order> orderList = Arrays.asList(order1, order2, order3);
+        List<Order> orderList = Arrays.asList(order1, order2, order3, order4, order5);
 
 //        for (Order order :
 //                orderList) {
@@ -31,8 +31,11 @@ public class OrderExample {
 //        Consumer<Order> consumer = (Order order) -> {System.out.println("Pedido criado em: " + order.getCreateDate());};
 //        Consumer<Order> consumer =  order -> {System.out.println("Pedido criado em: " + order.getCreateDate());};
         Consumer<Order> consumer = order -> System.out.println("Pedido criado em: " + order.getCreateDate());
+        System.out.println("----------- ----- --------------");
 
         orderList.forEach(printer);
+
+        System.out.println("----------- ----- --------------");
 
         orderList.forEach(order -> System.out.println("Pedido criado em: " + order.getCreateDate()));
 
@@ -40,6 +43,7 @@ public class OrderExample {
         orderList.stream()
                 .filter( order -> order.getStatus().equals(Status.CONFIRMED))
                 .forEach(printer);
+        System.out.println("----------- MAP --------------");
 
         List<Usuario> usuarios = orderList.stream()
                 .map(order -> new Usuario(order.getCustomerName()))
@@ -47,12 +51,18 @@ public class OrderExample {
 
         usuarios.forEach(System.out::println);
 
+        System.out.println("----------- GROUP --------------");
+
         Map<Status, List<Order>> orderGroup =
                 orderList.stream()
-                        .collect(Collectors.groupingBy(order::getStatus));
+                        .collect(Collectors.groupingBy(Order::getStatus));
 
-        System.out.println(orderGroup);
+        orderGroup.forEach((status, orders) -> {
+            System.out.println(status);
+            orders.forEach(System.out::println);
+        });
+    }
 
 
     }
-}
+
