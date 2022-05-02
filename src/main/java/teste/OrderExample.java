@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class OrderExample {
     public static void main(String[] args) {
@@ -69,8 +70,23 @@ public class OrderExample {
             System.out.println(status);
             orders.forEach(System.out::println);
         });
+
+        System.out.println("----------- ITERATE --------------");
+
+
+        IntStream.range(0, orderList.size())
+                .forEach(index -> {
+                    System.out.println(orderList.get(index));
+                });
+
+
+        System.out.println("----------- ITERATE2 --------------");
+        IntStream.iterate(0, operand -> operand +1)
+                .filter(number -> number % 2 ==0 )
+                .limit(20)
+                .forEach(System.out::println);
+
+
     }
-
-
     }
 
