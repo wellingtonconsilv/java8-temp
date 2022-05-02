@@ -14,4 +14,9 @@ public class Usuario {
                 "nome='" + nome + '\'' +
                 '}';
     }
+
+
+    public static Usuario map(Order order) {
+        return new Usuario(order.getCustomerName());
+    }
 }

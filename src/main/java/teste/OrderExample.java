@@ -51,6 +51,14 @@ public class OrderExample {
 
         usuarios.forEach(System.out::println);
 
+        System.out.println("----------- MAP2 --------------");
+
+        List<Usuario> usuarios2 = orderList.stream()
+                .map(Usuario::map)
+                .collect(Collectors.toList());
+
+        usuarios2.forEach(System.out::println);
+
         System.out.println("----------- GROUP --------------");
 
         Map<Status, List<Order>> orderGroup =
